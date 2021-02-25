@@ -20,9 +20,16 @@ namespace MediatRExample.Persistence
                 new Product { Id = 2, ProductName = "Pantolon" },
                 new Product { Id = 3, ProductName = "Ceket" }
                 );
+
+            modelBuilder.Entity<Category>().HasData(
+              new Category { Id = 1, CategoryName = "Man" },
+              new Category { Id = 2, CategoryName = "Woman" },
+              new Category { Id = 3, CategoryName = "Kids" }
+              );
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
     }
 }

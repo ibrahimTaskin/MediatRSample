@@ -1,9 +1,7 @@
-﻿using MediatRExample.Application.ProductBase.Queries;
-using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using MediatRExample.Application.Categoriess.Queries;
+using MediatRExample.Application.Productss;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MediatRExample.Controllers
@@ -11,20 +9,35 @@ namespace MediatRExample.Controllers
     /// <summary>
     /// Thin Controller
     /// </summary>
-    public class HomeController : BaseController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class HomeController : ControllerBase
     {
+        private IMediator _mediator;
 
-        [HttpGet]
-        public async Task<IActionResult> Products()
+        public HomeController(IMediator mediator)
         {
-            return Ok(await Mediator.Send(new List.Query()));
+            _mediator = mediator;
         }
+
+        //[HttpGet]
+        //public async Task<IActionResult> Products()
+        //{
+        //    return Ok(await _mediator.Send(new ProductsAllQuery()));
+        //}
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProduct()
+        public async Task<IActionResult> Product([FromRoute] GetProductQuery request)
         {
-            return Ok(await Mediator.Send(new GetActivity.Query()));
+            return Ok(await _mediator.Send(request));
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Categories()
+        {
+            return Ok(await _mediator.Send(new List.Query()));
         }
     }
 }

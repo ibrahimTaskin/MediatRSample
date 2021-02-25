@@ -22,6 +22,7 @@ namespace MediatRExample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddMediatR(typeof(Startup));
             services.AddDbContext<MediatrContext>(options => options.UseInMemoryDatabase("InMemory"));
             services.AddControllers();
@@ -43,6 +44,12 @@ namespace MediatRExample
             {
                 endpoints.MapControllers();
             });
+
+            using (var service = app.ApplicationServices.CreateScope())
+            {
+                var context = service.ServiceProvider.GetService<MediatrContext>();
+                context.Database.EnsureCreated();
+            }
         }
     }
 }
