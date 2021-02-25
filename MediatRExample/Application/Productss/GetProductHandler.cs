@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace MediatRExample.Application.Productss
 {
+    // Handler ,Query 'yi alıp sorgu yapmamızı sağlar
     public class GetProductHandler : IRequestHandler<GetProductQuery, Product>
     {
         private MediatrContext _context;
