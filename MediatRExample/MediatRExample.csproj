@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Application\" />
-    <Folder Include="Persistence\" />
+    <Folder Include="Application\ProductBase\Commands\" />
   </ItemGroup>
 
   <ItemGroup>
